@@ -116,5 +116,19 @@ func main() {
 	default:
 		fmt.Println("No es una operacion correcta")
 	}
-	fmt.Println("Pragrama terminado")
+	masOperaciones()
+}
+
+func masOperaciones() string {
+	fmt.Println("Desea hacer otra operación. si/no")
+	var scanner = bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+	
+	var respuesta = scanner.Text()
+		if respuesta == "si" {
+			main()
+		} else {
+			fmt.Println("Gracias por usar nuestra calculadora.")
+		}
+	return respuesta
 }
