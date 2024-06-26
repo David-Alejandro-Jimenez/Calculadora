@@ -7,7 +7,7 @@
 	- Resta
 	- Multiplicacion
 	- Division
-- En la carpeta Calculadora_#1 encontraras todo el codigo. 
+- Aqui encontraras todo el codigo. 
 
 
 # Clonar respoitorio en tu dispositivo local 
