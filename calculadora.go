@@ -9,7 +9,7 @@ import (
 
 func suma() int {
 	var suma = 0
-	var numero1, numero2 = leerValores()
+	var numero1, numero2, _ = leerValores()
 
 	var primerValor, err1 = strconv.Atoi(numero1)
 		if err1 != nil {
@@ -27,7 +27,7 @@ func suma() int {
 
 func resta() int {
 	var resta = 0
-	var numero1, numero2 = leerValores()
+	var numero1, numero2, _= leerValores()
 	var primerValor, err1 = strconv.Atoi(numero1)
 		if err1 != nil {
 			fmt.Println("No puedes introducir letras solo numeros")
@@ -42,7 +42,7 @@ func resta() int {
 
 func multiplicacion() int {
 	var multiplicacion = 0
-	var numero1, numero2 = leerValores()
+	var numero1, numero2, _ = leerValores()
 	var primerValor, err1 = strconv.Atoi(numero1)
 		if err1 != nil {
 			fmt.Println("No puedes introducir letras solo numeros")
@@ -57,7 +57,7 @@ func multiplicacion() int {
 
 func division() int {
 	var division = 0
-	var numero1, numero2 = leerValores()
+	var numero1, numero2, _ = leerValores()
 	var primerValor, err1 = strconv.Atoi(numero1)
 		if err1 != nil {
 			fmt.Println("No puedes introducir letras solo numeros")
@@ -76,7 +76,7 @@ func division() int {
 	return division
 }
 
-func leerValores() (string, string) {
+func leerValores() (string, string, string) {
 	fmt.Println("Introduzca su primer valor")
 	var primerScanner = bufio.NewScanner(os.Stdin)
 		primerScanner.Scan()
@@ -86,8 +86,18 @@ func leerValores() (string, string) {
 	var segundoScanner = bufio.NewScanner(os.Stdin)
 		segundoScanner.Scan()
 	var segundoValor = segundoScanner.Text()
-	return primerValor, segundoValor
 
+	//Despues de pedir los valores nos aseguramos que el usuario desea realizar X operacion
+		fmt.Println("¿Estas seguro de que deseas realizar esta operacion? si/no")
+		var scannerErrorDelUsuario = bufio.NewScanner(os.Stdin)
+			scannerErrorDelUsuario.Scan()
+		var errorDelUsuario = scannerErrorDelUsuario.Text()
+			if errorDelUsuario == "no" {
+				main()
+			} else {
+				fmt.Println("Continuaremos con la operacion que has elegido\n")
+			}
+		return primerValor, segundoValor, errorDelUsuario
 }
 
 func menu() {
@@ -110,7 +120,7 @@ func main() {
 	case "2":
 		fmt.Println("El Resultado de la resta es:", resta())
 	case "3": 
-		fmt.Println("El Resultado de la suma es:", multiplicacion())
+		fmt.Println("El Resultado de la multiplicación es:", multiplicacion())
 	case "4":
 		fmt.Println("El Resultado de la division es:", division())
 	default:
@@ -120,15 +130,16 @@ func main() {
 }
 
 func masOperaciones() string {
-	fmt.Println("Desea hacer otra operación. si/no")
-	var scanner = bufio.NewScanner(os.Stdin)
-		scanner.Scan()
+	//Pedimos al usuario si quiere realizar otra operacion o si desea terminar el proceso.
+		fmt.Println("¿Deseas hacer más operaciones? si/no")
+		var scanner = bufio.NewScanner(os.Stdin)
+			scanner.Scan()
 	
-	var respuesta = scanner.Text()
-		if respuesta == "si" {
-			main()
-		} else {
-			fmt.Println("Gracias por usar nuestra calculadora.")
-		}
-	return respuesta
+		var respuesta = scanner.Text()
+			if respuesta == "si" {
+				main()
+			} else {
+				fmt.Println("Gracias por usar nuestra calculadora.")
+			}
+		return respuesta
 }
